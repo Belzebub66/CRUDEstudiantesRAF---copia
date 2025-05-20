@@ -332,6 +332,7 @@ public class FrmAgregarEstudiante extends javax.swing.JFrame {
             this.objControladorCRUDEst.guardarRegistro(numControl, nombre, ape, semestre, grupo, carrera);
             JOptionPane.showMessageDialog(this, "Registro guardado con éxito");
             limpiarCajas();
+            this.objControladorCRUDEst.objVistaCRUDEst.actualizarTabla();
         } else {
             JOptionPane.showMessageDialog(this, "Control no Válido");
             this.txtNumControl.requestFocus();

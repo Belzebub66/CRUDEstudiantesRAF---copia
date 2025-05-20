@@ -6,6 +6,8 @@ import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.ArchivoOrgnDir;
+import javax.swing.table.TableRowSorter;
+import javax.swing.RowFilter;
 
 public class VistaCRUDEstudiantes extends javax.swing.JFrame {
     ControladorCRUDEstudiantes objControladorCRUDEst;
@@ -26,7 +28,8 @@ public class VistaCRUDEstudiantes extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated
+    // Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
@@ -62,26 +65,26 @@ public class VistaCRUDEstudiantes extends javax.swing.JFrame {
         });
 
         jtblEstudiantes.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
-            },
-            new String [] {
-                "Num. Control", "Nombre", "Apellidos", "Semestre", "Grupo", "Carrera"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                new Object[][] {
+                        { null, null, null, null, null, null },
+                        { null, null, null, null, null, null },
+                        { null, null, null, null, null, null },
+                        { null, null, null, null, null, null },
+                        { null, null, null, null, null, null },
+                        { null, null, null, null, null, null },
+                        { null, null, null, null, null, null },
+                        { null, null, null, null, null, null }
+                },
+                new String[] {
+                        "Num. Control", "Nombre", "Apellidos", "Semestre", "Grupo", "Carrera"
+                }) {
+            Class[] types = new Class[] {
+                    java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class,
+                    java.lang.String.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
+                return types[columnIndex];
             }
         });
         jScrollPane1.setViewportView(jtblEstudiantes);
@@ -110,67 +113,75 @@ public class VistaCRUDEstudiantes extends javax.swing.JFrame {
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(84, 84, 84)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(143, 143, 143)
-                        .addComponent(jLabel2)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnAgregar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnEliminar)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnEditar))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 25, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(txtNumControlBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnBuscar))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 536, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(28, 28, 28))
-        );
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addGap(84, 84, 84)
+                                                .addComponent(jLabel1))
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addGap(143, 143, 143)
+                                                .addComponent(jLabel2)))
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(btnAgregar)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addComponent(btnEliminar)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(btnEditar))
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addGap(0, 25, Short.MAX_VALUE)
+                                                .addGroup(layout
+                                                        .createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                        .addGroup(layout.createSequentialGroup()
+                                                                .addComponent(txtNumControlBuscar,
+                                                                        javax.swing.GroupLayout.PREFERRED_SIZE, 116,
+                                                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                .addPreferredGap(
+                                                                        javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                                .addComponent(btnBuscar))
+                                                        .addComponent(jScrollPane1,
+                                                                javax.swing.GroupLayout.PREFERRED_SIZE, 536,
+                                                                javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGap(28, 28, 28)));
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2)
-                .addGap(32, 32, 32)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnBuscar)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(8, 8, 8)
-                        .addComponent(txtNumControlBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnAgregar)
-                    .addComponent(btnEliminar)
-                    .addComponent(btnEditar))
-                .addContainerGap(58, Short.MAX_VALUE))
-        );
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addGap(22, 22, 22)
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel2)
+                                .addGap(32, 32, 32)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(btnBuscar)
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addGap(8, 8, 8)
+                                                .addComponent(txtNumControlBuscar,
+                                                        javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                        javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                        javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(18, 18, 18)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 163,
+                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(btnAgregar)
+                                        .addComponent(btnEliminar)
+                                        .addComponent(btnEditar))
+                                .addContainerGap(58, Short.MAX_VALUE)));
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnEditarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditarMouseClicked
+    private void btnEditarMouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_btnEditarMouseClicked
         // TODO add your handling code here:
         FrmEditarEstudiante objEditarEstudiante = new FrmEditarEstudiante(this.objControladorCRUDEst);
         objEditarEstudiante.setVisible(true);
-    }//GEN-LAST:event_btnEditarMouseClicked
+    }// GEN-LAST:event_btnEditarMouseClicked
 
     private void btnAgregarMouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_btnAgregarMouseClicked
         // TODO add your handling code here:
@@ -224,6 +235,34 @@ public class VistaCRUDEstudiantes extends javax.swing.JFrame {
          * else
          * JOptionPane.showMessageDialog(this,"El registro no Existe");
          */
+        // Verificar que se ingresó un número de control
+        if (numControlBus.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Por favor ingrese un número de control",
+                    "Campo vacío", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        DefaultTableModel modelo = (DefaultTableModel) this.jtblEstudiantes.getModel();
+        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(modelo);
+        this.jtblEstudiantes.setRowSorter(sorter);
+
+        if (numControlBus.length() == 0) {
+            sorter.setRowFilter(null);
+        } else {
+            // Filtrar para mostrar solo el estudiante con el número de control buscado
+            sorter.setRowFilter(RowFilter.regexFilter("^" + numControlBus + "$", 0));
+        }
+
+        // Si hay filas visibles después del filtrado, seleccionar la primera
+        if (this.jtblEstudiantes.getRowCount() > 0) {
+            this.jtblEstudiantes.setRowSelectionInterval(0, 0);
+            this.jtblEstudiantes.setSelectionBackground(Color.GREEN);
+        } else {
+            JOptionPane.showMessageDialog(this, "No se encontró ningún estudiante con ese número de control",
+                    "No encontrado", JOptionPane.INFORMATION_MESSAGE);
+            // Quitar el filtro para mostrar todos los registros nuevamente
+            sorter.setRowFilter(null);
+        }
     }
 
     // En la clase VistaCRUDEstudiantes
@@ -250,6 +289,9 @@ public class VistaCRUDEstudiantes extends javax.swing.JFrame {
         // archivo.cerrarArchivo();
     }
 
+    public void actualizarTabla() {
+        cargarDatosEnTabla();
+    }
     // Llamar al método en el constructor o en un método de inicialización
 
     /**
