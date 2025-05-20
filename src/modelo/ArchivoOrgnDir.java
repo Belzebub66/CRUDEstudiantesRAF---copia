@@ -154,9 +154,28 @@ public class ArchivoOrgnDir {
             raf.readFully(buf);
 
             String nControl = new String(buf, 0, NUMCONTROL_LEN, "ISO-8859-1").trim();
-            String nombre = new String(buf, NUMCONTROL_LEN, NOMBRE_LEN, "ISO-8859-1").trim();
-            JOptionPane.showMessageDialog(null, nControl + " " + nombre);
+
+            // Verificar si el registro existe (si el número de control no está vacío)
+            if (!nControl.isEmpty() && nControl.equals(nc)) {
+                String nombre = new String(buf, NUMCONTROL_LEN, NOMBRE_LEN, "ISO-8859-1").trim();
+                String apellidos = new String(buf, NUMCONTROL_LEN + NOMBRE_LEN, APELLIDOS_LEN, "ISO-8859-1").trim();
+                String semestre = new String(buf, NUMCONTROL_LEN + NOMBRE_LEN + APELLIDOS_LEN, SEMESTRE_LEN,
+                        "ISO-8859-1").trim();
+                String grupo = new String(buf, NUMCONTROL_LEN + NOMBRE_LEN + APELLIDOS_LEN + SEMESTRE_LEN, GRUPO_LEN,
+                        "ISO-8859-1").trim();
+                String carrera = new String(buf, NUMCONTROL_LEN + NOMBRE_LEN + APELLIDOS_LEN + SEMESTRE_LEN + GRUPO_LEN,
+                        CARRERA_LEN, "ISO-8859-1").trim();
+
+                // Crear y devolver el array con los datos del registro
+                String[] registro = { nControl, nombre, apellidos, semestre, grupo, carrera };
+                return registro;
+            }
             /*
+             * String nControl = new String(buf, 0, NUMCONTROL_LEN, "ISO-8859-1").trim();
+             * String nombre = new String(buf, NUMCONTROL_LEN, NOMBRE_LEN,
+             * "ISO-8859-1").trim();
+             * JOptionPane.showMessageDialog(null, nControl + " " + nombre);
+             * 
              * String linea=null;
              * linea = buffer.readLine();
              * while(linea!=null){

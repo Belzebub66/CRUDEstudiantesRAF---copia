@@ -283,13 +283,30 @@ public class FrmEditarEstudiante extends javax.swing.JFrame {
         if (registro != null) {
             this.txtNombre.setText(registro[1]);
             this.txtApellidos.setText(registro[2]);
-            this.btnEditar.setEnabled(true);
-        } else
-            JOptionPane.showMessageDialog(this, "El registro no Existe");
 
+            // Establecer el semestre en el combobox
+            this.cboSemestre.setSelectedItem(registro[3]);
+
+            // Establecer el grupo en los radio buttons
+            char grupo = registro[4].charAt(0);
+            if (grupo == 'A')
+                this.rdbtnGrupoA.setSelected(true);
+            else if (grupo == 'B')
+                this.rdbtnGrupoB.setSelected(true);
+            else
+                this.rdbtnGrupoC.setSelected(true);
+
+            // Establecer la carrera en el combobox
+            this.cboCarrera.setSelectedItem(registro[5]);
+
+            // Habilitar los componentes para edición
+            this.des_habilitaComponentes(true);
+        } else {
+            JOptionPane.showMessageDialog(this, "El registro no existe");
+        }
     }
 
-    private void editar() {
+    private void editar1() {
         /*
          * int respuesta =
          * JOptionPane.showConfirmDialog(this,"Estas seguro de eliminar el registro");
@@ -303,6 +320,32 @@ public class FrmEditarEstudiante extends javax.swing.JFrame {
          * this.txtNumControl.requestFocus();
          * }
          */
+    }
+
+    private void editar() {
+        String numControl = this.txtNumControl.getText();
+        String nombre = this.txtNombre.getText();
+        String apellidos = this.txtApellidos.getText();
+        int semestre = Integer.parseInt(this.cboSemestre.getSelectedItem().toString());
+        char grupo;
+        if (this.rdbtnGrupoA.isSelected())
+            grupo = 'A';
+        else if (this.rdbtnGrupoB.isSelected())
+            grupo = 'B';
+        else
+            grupo = 'C';
+        String carrera = this.cboCarrera.getSelectedItem().toString();
+
+        // Actualizar el registro
+        this.objControladorCRUDEst.guardarRegistro(numControl, nombre, apellidos, semestre, grupo, carrera);
+        JOptionPane.showMessageDialog(this, "Registro actualizado con éxito");
+
+        // Limpiar y deshabilitar campos
+        this.txtNumControl.setText("");
+        this.txtNombre.setText("");
+        this.txtApellidos.setText("");
+        this.des_habilitaComponentes(false);
+        this.txtNumControl.requestFocus();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

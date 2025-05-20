@@ -175,6 +175,9 @@
           <Image iconType="3" name="/imagenes/editar48px.png"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnEditarMouseClicked"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>
